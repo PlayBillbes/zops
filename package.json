@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "node dist/app.js",
+    "build": "modsbots",
   },
   "dependencies": {
     "http-proxy": "latest",
