@@ -4,8 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node dist/app.js",
-    "build": "npm run build"
+    "build": "npm run build",
+    "start": "node dist/app.js"
   },
   "dependencies": {
     "http-proxy": "latest",
