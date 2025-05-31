@@ -1,11 +1,11 @@
 {
-  "name": "nodejs-proxy-modsbots",
+  "name": "nodejs-proxy",
   "version": "1.0.0",
-  "description": "this is what we want",
+  "description": "",
   "main": "app.js",
   "scripts": {
-    "build": "babel src -d dist", // Add this line, adjust command as needed
-    "start": "node dist/app.js"
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "http-proxy": "latest",
