@@ -10,7 +10,7 @@ const errcb = (...args) => console.error.bind(this, ...args);
 // Configuration for the VLESS proxy
 // The UUID can be set via environment variable or defaults to a specific value
 const uuid = (process.env.UUID || 'd342d11e-d424-4583-b36e-524ab1f0afa4').replace(/-/g, "");
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 3000;
 const zerothrust_auth = process.env.ZERO_AUTH || 'eyJhIjoiNmIwYzRiZDczMjQ4Y2IxNTYyMTdmN2QyNzZlOWE5ZjAiLCJ0IjoiNTkxNjI5YmUtNjI3MS00MGYwLWJjNmItNmIwMTZmYTIxMTE2IiwicyI6Ik56Y3lPVE5pTWpjdE5ERm1NeTAwWldReExXRXhOakV0WVdRMU5qTXpPVEF3WXpneSJ9';
 
 // Do Not Edit Below
