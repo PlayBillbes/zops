@@ -1,35 +1,42 @@
-# zerops.yml
-# This file defines the services and their configurations for deployment on Zerops.
-
-# Define the Node.js service
-services:
-  - hostname: web
-    type: nodejs@18 # Specify the Node.js runtime version. Adjust if needed (e.g., nodejs@20)
+zerops:
+  - setup: nodejs
+    # ==== how to build your application ====
     build:
-      basePath: ./ # The base path to your Node.js application source code
+      # what technologies should the build
+      # container be based on (can be an array)
+      base: nodejs@22
+
+      # what commands to use to build your app
       buildCommands:
-        - npm install # Install dependencies
-        - npm run build # Run your application's build script (e.g., for bundling client-side assets)
-    deploy:
-      startCommand: npm run start # Command to start your Node.js SSR application
-      # Optional: Environment variables for your application
-      # env:
-      #   NODE_ENV: production
-      #   PORT: 80
-      #   API_URL: https://api.yourdomain.com
-    minReplicas: 1 # Minimum number of running instances for your service
-    maxReplicas: 3 # Maximum number of running instances (adjust based on expected load)
-    # Optional: Health check configuration
-    # healthCheck:
-    #   httpGet:
-    #     path: /health # A health check endpoint in your application
-    #     port: 80
-    #     initialDelaySeconds: 30
-    #     periodSeconds: 10
-    #     timeoutSeconds: 5
-    #     successThreshold: 1
-    #     failureThreshold: 3
-    # Optional: Storage configuration if your app needs persistent storage
-    # storage:
-    #   size: 10GB
-    #   mountPath: /app/data
+        - npm i
+        - npm run build
+
+      # select which files / folders to deploy
+      # after the build successfully finished
+      deployFiles:
+        - dist
+        - package.json
+        - node_modules
+
+      # *optional*: which files / folders
+      # to cache for the next build run
+      cache:
+        - node_modules
+        - package-lock.json
+
+    # ==== how to run your application ====
+    run:
+      # what technology should the runtime
+      # container be based on, can be extended
+      # in `run.prepareCommands` using
+      # `zsc install nodejs@20`
+      base: nodejs@22
+
+      # what ports your app listens on
+      # and whether it supports http traffic
+      ports:
+        - port: 3000
+          httpSupport: true
+
+      # how to start your application
+      start: npm start
