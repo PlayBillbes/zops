@@ -4,8 +4,8 @@
   "description": "this is what we want",
   "main": "app.js",
   "scripts": {
-    "start": "node main.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "babel src -d dist", // Add this line, adjust command as needed
+    "start": "node dist/app.js"
   },
   "dependencies": {
     "http-proxy": "latest",
