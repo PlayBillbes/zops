@@ -1,11 +1,35 @@
-zerops:
-  - setup: app
+# zerops.yml
+# This file defines the services and their configurations for deployment on Zerops.
+
+# Define the Node.js service
+services:
+  - hostname: web
+    type: nodejs@18 # Specify the Node.js runtime version. Adjust if needed (e.g., nodejs@20)
     build:
-      base: nodejs@latest
+      basePath: ./ # The base path to your Node.js application source code
       buildCommands:
-        - npm install
-        - npm run build
-    run:
-      base: static
-    deployFiles:
-      - dist/~
+        - npm install # Install dependencies
+        - npm run build # Run your application's build script (e.g., for bundling client-side assets)
+    deploy:
+      startCommand: npm run start # Command to start your Node.js SSR application
+      # Optional: Environment variables for your application
+      # env:
+      #   NODE_ENV: production
+      #   PORT: 80
+      #   API_URL: https://api.yourdomain.com
+    minReplicas: 1 # Minimum number of running instances for your service
+    maxReplicas: 3 # Maximum number of running instances (adjust based on expected load)
+    # Optional: Health check configuration
+    # healthCheck:
+    #   httpGet:
+    #     path: /health # A health check endpoint in your application
+    #     port: 80
+    #     initialDelaySeconds: 30
+    #     periodSeconds: 10
+    #     timeoutSeconds: 5
+    #     successThreshold: 1
+    #     failureThreshold: 3
+    # Optional: Storage configuration if your app needs persistent storage
+    # storage:
+    #   size: 10GB
+    #   mountPath: /app/data
